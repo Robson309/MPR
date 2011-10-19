@@ -13,6 +13,7 @@ public class Main {
 		List<Ksiazka> listaKsiazek= new ArrayList<Ksiazka>();
 		listaKsiazek.add(new Ksiazka("Java", "Gary Horstman"));
 		listaKsiazek.add(new Ksiazka("Krzyzacy", "Sienkiewicz"));
+		listaKsiazek.add(new Ksiazka("Pan Tadeusz", "Mickiewicz"));
 		
 		Person p = new Person ("Jan", "Kowalski", listaKsiazek);
 		p.printPerson();
