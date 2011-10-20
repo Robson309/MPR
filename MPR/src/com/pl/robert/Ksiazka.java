@@ -10,6 +10,13 @@ public class Ksiazka implements Ibook {
 		this.tytul=tytul;
 	}
 	public void printKsiazka() {
-		System.out.println("tytul: " + tytul + "autor" + autor);
+		System.out.println("tytul: " + tytul + " autor " + autor);
 	}
+	public String getTytul() {
+		return tytul;
+	}
+	public String getAutor() {
+		return autor;
+	}
+
 }

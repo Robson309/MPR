@@ -26,4 +26,55 @@ public class Person {
 		for(Ksiazka c : listaKsiazek)
 			c.printKsiazka();
 	}
+	public void removeKsiazka(String tytul)
+	{
+		int pozycja=0;
+		for (Ksiazka k: listaKsiazek)
+		{
+			if (k.getTytul().equals(tytul))
+			{
+				listaKsiazek.remove(pozycja);break;
+			}
+			pozycja++;
+		}
+	}
+	public void renameTytul(String tytul, String nowytytul)
+	{
+		int pozycja=0;
+		for (Ksiazka k: listaKsiazek)
+		{
+			if (k.getTytul().equals(tytul))
+			{
+				String autor = k.getAutor();
+				listaKsiazek.set(pozycja, new Ksiazka(nowytytul, autor));
+			}
+			pozycja++;
+		}
+	}
+	public void renameAutor(String tytul, String newautor)
+	{
+		int pozycja=0;
+		for (Ksiazka k: listaKsiazek)
+		{
+			if (k.getTytul().equals(tytul))
+			{
+				listaKsiazek.set(pozycja, new Ksiazka(tytul, newautor));
+			}
+			pozycja++;
+		}
+	}
+	public void searchKsiazka(String tytul)
+	{
+		int pozycja=0;
+		for (Ksiazka k: listaKsiazek)
+		{
+			if (k.getTytul().equals(tytul))
+			{
+				//pozycja+1 bo numerowanie od zera 
+				System.out.println("Książka " + tytul 
+						+ " jest na pozycji " +(pozycja+1));
+			}
+			pozycja++;
+		}
+	}
 }
