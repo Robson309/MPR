@@ -1,80 +1,104 @@
 package com.pl.robert;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 public class Person {
-	public String name;
-	public String surname;
+
+	String name;
+	String surname;
+	List<Book> listBook = new ArrayList<Book>();
 	
-	public List<Ksiazka> listaKsiazek;
-	
-	public Person(String name, String surname, List<Ksiazka> ksiazki)
-	{
-		this.listaKsiazek=ksiazki;
-		this.name=name;
-		this.surname=surname;
+	private static Logger logger = Logger.getLogger(Person.class);
+
+	public Person(String name, String surname) {
+
+		this.name = name;
+		this.surname = surname;
+		this.listBook = new ArrayList<Book>();
 	}
-	
-	public void printPerson()
-	{
-		System.out.println("Imie "+ this.name + " Nazwisko " + this.surname);
+
+	public void showPerson() {
+		System.out.println("Name: " + name + " surname: " + surname);
 	}
-	
-	public void printKsiazki()
-	{
-		for(Ksiazka c : listaKsiazek)
-			c.printKsiazka();
+
+	public void showBook() {
+		for (Book b : listBook) {
+			b.showBook();
+		}
+
 	}
-	public void removeKsiazka(String tytul)
-	{
-		int pozycja=0;
-		for (Ksiazka k: listaKsiazek)
-		{
-			if (k.getTytul().equals(tytul))
-			{
-				listaKsiazek.remove(pozycja);break;
+
+	public void addBook(String title, int yearpublication) throws MyException {
+		listBook.add(new Book(title, yearpublication));
+		if (yearpublication<=1990)
+			throw new MyException("Date of publication have to be after 1990");
+		logger.info("Add new book " + title + " year of publication " + yearpublication);
+	}
+
+	public void removeBook(String title) {
+		int position = 0;
+		for (Book book : listBook) {
+			if (book.getTitle().equals(title)) {
+				listBook.remove(position);
+				break;
 			}
-			pozycja++;
+			position++;
+		}
+	logger.info("Remove book " + title);
+	}
+
+	public void removeAllBooks() {
+		listBook.clear();
+	}
+
+	public void editBook(String title, int newTitle) {
+		int position = 0;
+		for (Book book : listBook) {
+			if (book.getTitle().equals(title)) {
+				listBook.set(position, new Book(title, newTitle));
+				break;
+			}
+			position++;
 		}
 	}
-	public void renameTytul(String tytul, String nowytytul)
-	{
-		int pozycja=0;
-		for (Ksiazka k: listaKsiazek)
-		{
-			if (k.getTytul().equals(tytul))
-			{
-				String autor = k.getAutor();
-				listaKsiazek.set(pozycja, new Ksiazka(nowytytul, autor));
+
+	public void searchBook(String title) {
+		int position = 0;
+		for (Book book : listBook) {
+			if (book.getTitle().equals(title)) {
+				System.out.println("Search book " + book.getTitle()
+						+ " is on position " + position);
 			}
-			pozycja++;
+			position++;
 		}
 	}
-	public void renameAutor(String tytul, String newautor)
-	{
-		int pozycja=0;
-		for (Ksiazka k: listaKsiazek)
-		{
-			if (k.getTytul().equals(tytul))
-			{
-				listaKsiazek.set(pozycja, new Ksiazka(tytul, newautor));
-			}
-			pozycja++;
-		}
+
+	public String getName() {
+		return name;
 	}
-	public void searchKsiazka(String tytul)
-	{
-		int pozycja=0;
-		for (Ksiazka k: listaKsiazek)
-		{
-			if (k.getTytul().equals(tytul))
-			{
-				//pozycja+1 bo numerowanie od zera 
-				System.out.println("Książka " + tytul 
-						+ " jest na pozycji " +(pozycja+1));
-			}
-			pozycja++;
-		}
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public List<Book> getListBook() {
+		return listBook;
+	}
+
+	public void setListBook(List<Book> listBook) {
+		this.listBook = listBook;
+	}
+
 }
