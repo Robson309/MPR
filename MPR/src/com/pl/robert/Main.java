@@ -11,42 +11,40 @@ public class Main {
 		
 		PropertyConfigurator.configure("Log4J.properties");
 
-		Person person1 = new Person("Jan", "Kowalski");
+		Person ja = new Person("Jan", "Kowalski");
 
-		person1.addBook("Matematyka 2", 2010);
+		ja.addBook("Cration games", 2007);
 		try
 		{
-			person1.addBook("Matematyka", 1500);
+			ja.addBook("old book", 1888);
 		}
 		catch(MyException e)
 		{
 			logger.error(e.getMessage());
 		}
-		person1.addBook("Java", 2005);
-		person1.addBook("C++", 1999);
-		person1.addBook("PHP",2004);
-		person1.removeBook("PHP");
-		person1.editBook("C++", 2007);
+		ja.addBook("Java", 2009);
+		ja.addBook("Pascal", 1999);
+		ja.addBook("C#",2000);
+		ja.editBook("C#", 2010);
+		ja.removeBook("Pascal");
 		
-		
+		ja.showPerson();
+		System.out.println("***********************************");
+		ja.showBook();
+		System.out.println("Search");
+		ja.searchBook("LBP");
 
-		System.out.println("************************");
-		person1.showPerson();
-		person1.showBook();
-		
-		System.out.println("*************************");
-		person1.searchBook("Matematyka 2");
+		System.out.println("***********************************");
 
-		System.out.println("*************************");
+		Person lol = new Person("Jan", "Nowak");
 
-		Person person2 = new Person("Jan", "Nowak");
+		lol.addBook("CCS", 2006);
+		lol.removeAllBooks();
+		lol.addBook("HTML5", 2011);
 
-		person2.addBook("Java zaawansowana", 1995);
-		person2.removeAllBooks(); 
-		person2.addBook("Java postawy", 1993);
-
-		person2.showPerson();
-		person2.showBook();
+		lol.showPerson();
+		System.out.println("***********************************");
+		lol.showBook();
 
 	}
 }
