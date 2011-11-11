@@ -14,11 +14,11 @@
 		</jar>
 	</target>
 	
-	<target name="runjar" depends="jar">
+	<target name="run-jar" depends="jar">
 		<java jar="bin/jar/MPR.jar" fork="true"/>
 	</target> 
 
-	<target name="clear">
+	<target name="clean">
 		<delete dir="bin/jar">
 		</delete>
 	</target>
