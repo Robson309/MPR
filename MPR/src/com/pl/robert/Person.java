@@ -3,78 +3,77 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
 
 public class Person {
 
 	String name;
 	String surname;
-	List<Book> listBooks = new ArrayList<Book>();
-	
+	List<Book> listBook = new ArrayList<Book>();
+
 	private static Logger logger = Logger.getLogger(Person.class);
 
 	public Person(String name, String surname) {
 
 		this.name = name;
 		this.surname = surname;
-		this.listBooks = new ArrayList<Book>();
+		this.listBook = new ArrayList<Book>();
 	}
 
 	public void showPerson() {
-		System.out.println("Name: " + name + "Surname: " + surname);
+		System.out.println("Name: " + name + "\tSurname: " + surname);
 	}
 
 	public void showBook() {
-		for (Book b : listBooks) {
-			b.showBook();
+		for (Book g : listBook) {
+			g.showBook();
 		}
 
 	}
 
-	public void addBook(String name, int datepublication) throws MyException {
-		if (datepublication>1990)
-		listBooks.add(new Book(name, datepublication));
-		if (datepublication<=1990) throw new MyException("Publication date cant be erlier then 1990");
-		logger.info("Add new book " + name + " date of publication " + datepublication);
+	public void addBook(String title, int datepublication) throws MyException {
+		if (datepublication > 0) {
+			listBook.add(new Book(title, datepublication));
+			logger.info("Add book" + title + " date of publication " + datepublication);
+		}
+		if (datepublication <= 0)
+			throw new MyException("Date of publication can not be after 0");
 	}
 
-	public void removeBook(String name) {
-		int position = 0;
-		for (Book book : listBooks) {
-			if (book.getName().equals(name)) {
-				listBooks.remove(position);
-				break;
-			}
-			position++;
-		}
-	logger.info("Remove book " + name);
+	public void removeBook(String title) {
+		listBook.remove(search(title));
+		logger.info("Remove book " + title);
 	}
 
 	public void removeAllBooks() {
-		listBooks.clear();
+		listBook.clear();
+		logger.info("Remove all books");
 	}
 
-	public void editBook(String name, int newDatePublication) {
-		int position = 0;
-		for (Book book : listBooks) {
-			if (book.getName().equals(name)) {
-				listBooks.set(position, new Book(name, newDatePublication));
-				break;
-			}
-			position++;
+	public void editBook(String title, int newDatePublication) throws MyException {
+		if (newDatePublication > 1900) {
+			listBook.set(listBook.indexOf(search(title)), new Book(title,
+					newDatePublication));
+			logger.info("Edit book " + title + " date publication change "
+					+ search(title).getDatePublication() + " to " + newDatePublication);
 		}
+		if (newDatePublication <= 1900)
+			throw new MyException("Edit date publication can't be after 1990");
 	}
 
-	public void searchBook(String nazwa) {
-		int position = 0;
-		for (Book book : listBooks) {
-			if (book.getName().equals(nazwa)) {
-				System.out.println("Search book " + book.getName()
-						+ " is on possition " + position);
+	public void searchBook(String title) {
+		System.out.println("Search book " + search(title).getTitle()
+				+ " is on position "
+				+ listBook.indexOf(search(title)));
+
+	}
+
+	public Book search(String title) {
+		for (Book book : listBook) {
+			if (book.getTitle().equals(title)) {
+				return book;
 			}
-			position++;
 		}
+		return search(title);
 	}
 
 	public String getName() {
@@ -94,11 +93,11 @@ public class Person {
 	}
 
 	public List<Book> getListBooks() {
-		return listBooks;
+		return listBook;
 	}
 
-	public void setListBooks(List<Book> listBooks) {
-		this.listBooks = listBooks;
+	public void setListBook(List<Book> listBooks) {
+		this.listBook = listBooks;
 	}
 
 }

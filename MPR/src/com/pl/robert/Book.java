@@ -1,31 +1,31 @@
 package com.pl.robert;
 public class Book {
 
-	String name;
+	String title;
 	Integer datepublication;
 
-	public Book(String name, Integer datepublication) {
-		this.name = name;
+	public Book(String title, Integer datepublication) {
+		this.title = title;
 		this.datepublication = datepublication;
 	}
 
 	public void showBook() {
-		System.out.println("Name: " + this.name + "datepublication: " + this.datepublication);
+		System.out.println("Title: " + this.title + "\tDate of publication: " + this.datepublication);
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Integer getDatePublication() {
 		return datepublication;
 	}
 
-	public void setCena(Integer datepublication) {
+	public void setDatePublication(Integer datepublication) {
 		this.datepublication = datepublication;
 	}
 }
