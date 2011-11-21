@@ -4,11 +4,11 @@ import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
 public class Main {
-	
+
 	private static Logger logger = Logger.getLogger(Main.class);
 
 	public static void main(String[] args) throws MyException {
-		
+
 		PropertyConfigurator.configure("Log4J.properties");
 
 		Person ja = new Person("Jan", "Kowalski");
@@ -16,7 +16,7 @@ public class Main {
 		ja.addBook("Cration games", 2007);
 		try
 		{
-			ja.addBook("old book", 1888);
+			ja.addBook("Cration games 2", 1888);
 		}
 		catch(MyException e)
 		{
@@ -27,12 +27,12 @@ public class Main {
 		ja.addBook("C#",2000);
 		ja.editBook("C#", 2010);
 		ja.removeBook("Pascal");
-		
+
 		ja.showPerson();
 		System.out.println("***********************************");
 		ja.showBook();
 		System.out.println("Search");
-		ja.searchBook("LBP");
+		ja.searchBook("Cration games");
 
 		System.out.println("***********************************");
 
