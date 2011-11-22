@@ -7,7 +7,7 @@ public class Main {
 
 	private static Logger logger = Logger.getLogger(Main.class);
 
-	public static void main(String[] args) throws MyException {
+	public static void main(String[] args) throws YearException {
 
 		PropertyConfigurator.configure("Log4J.properties");
 
@@ -18,7 +18,7 @@ public class Main {
 		{
 			ja.addBook("Cration games 2", 1888);
 		}
-		catch(MyException e)
+		catch(YearException e)
 		{
 			logger.error(e.getMessage());
 		}

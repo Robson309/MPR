@@ -30,13 +30,13 @@ public class Person {
 
 	}
 
-	public void addBook(String title, int datepublication) throws MyException {
+	public void addBook(String title, int datepublication) throws YearException {
 		if (datepublication > 0) {
 			listBook.add(new Book(title, datepublication));
 			logger.info("Add book" + title + " date of publication " + datepublication);
 		}
 		if (datepublication <= 0)
-			throw new MyException("Date of publication can not be after 0");
+			throw new YearException("Date of publication can not be after 0");
 	}
 
 	public void removeBook(String title) {
@@ -49,7 +49,7 @@ public class Person {
 		logger.info("Remove all books");
 	}
 
-	public void editBook(String title, int newDatePublication) throws MyException {
+	public void editBook(String title, int newDatePublication) throws YearException {
 		if (newDatePublication > 1900) {
 			listBook.set(listBook.indexOf(search(title)), new Book(title,
 					newDatePublication));
@@ -57,7 +57,7 @@ public class Person {
 					+ search(title).getDatePublication() + " to " + newDatePublication);
 		}
 		if (newDatePublication <= 1900)
-			throw new MyException("Edit date publication can't be after 1990");
+			throw new YearException("Edit date publication can't be after 1990");
 	}
 
 	public void searchBook(String title) {

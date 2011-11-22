@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.pl.robert.*;
 
-public class Test {
+public class BookTest {
 	Person asdf = new Person("Jan", "Kowal");
 	
 	@BeforeClass
@@ -29,7 +29,7 @@ public class Test {
 	}
 
 	@Test
-	public void testBook() throws MyException {
+	public void testBook() throws YearException {
 		asdf.addBook("Java", 2002);
 		assertTrue(asdf.getListBooks().size()>0);
 	}
