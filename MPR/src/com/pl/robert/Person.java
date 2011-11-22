@@ -1,79 +1,88 @@
 package com.pl.robert;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 public class Person {
-
-	String name;
-	String surname;
-	List<Book> listBook = new ArrayList<Book>();
-
-	private static Logger logger = Logger.getLogger(Person.class);
-
-	public Person(String name, String surname) {
-
+	public String name;
+	public String surname;
+		
+	public List<Book> bookList = new ArrayList<Book>();
+	 
+	public Person(String name, String surname)
+	{
 		this.name = name;
 		this.surname = surname;
-		this.listBook = new ArrayList<Book>();
+	}
+	
+	public Person(String name, String surname, List<Book> bookList)
+	{
+		this.name = name;
+		this.surname = surname;
+		this.bookList = bookList;
+	}
+	
+	public void showBooks()
+	{
+		for(Book b : this.bookList)
+		{
+			b.showBooks();
+		}
 	}
 
 	public void showPerson() {
-		System.out.println("Name: " + name + "\tSurname: " + surname);
+		System.out.println(name + " " + surname);
 	}
 
-	public void showBook() {
-		for (Book g : listBook) {
-			g.showBook();
+	public void printBook() {
+		for (Book b : bookList) {
+			b.showBooks();
 		}
-
 	}
 
-	public void addBook(String title, int datepublication) throws YearException {
-		if (datepublication > 0) {
-			listBook.add(new Book(title, datepublication));
-			logger.info("Add book" + title + " date of publication " + datepublication);
+	public void addBook(Book b) {
+		
+		bookList.add(b);
+	}
+
+	public void removeBook(Book book) {		
+		bookList.remove(book);
 		}
-		if (datepublication <= 0)
-			throw new YearException("Date of publication can not be after 0");
+		
+
+	public void clearBookList() {
+		bookList.clear();
 	}
 
-	public void removeBook(String title) {
-		listBook.remove(search(title));
-		logger.info("Remove book " + title);
-	}
 
-	public void removeAllBooks() {
-		listBook.clear();
-		logger.info("Remove all books");
-	}
-
-	public void editBook(String title, int newDatePublication) throws YearException {
-		if (newDatePublication > 1900) {
-			listBook.set(listBook.indexOf(search(title)), new Book(title,
-					newDatePublication));
-			logger.info("Edit book " + title + " date publication change "
-					+ search(title).getDatePublication() + " to " + newDatePublication);
-		}
-		if (newDatePublication <= 1900)
-			throw new YearException("Edit date publication can't be after 1990");
-	}
-
-	public void searchBook(String title) {
-		System.out.println("Search book " + search(title).getTitle()
-				+ " is on position "
-				+ listBook.indexOf(search(title)));
-
-	}
-
-	public Book search(String title) {
-		for (Book book : listBook) {
+	public Book searchBookTitle(String title) {
+		
+		for (Book book : bookList) {
 			if (book.getTitle().equals(title)) {
 				return book;
 			}
 		}
-		return search(title);
+		return null;
+	}
+	
+	public Book findBookAuthor(String author) {
+		
+		for (Book book : bookList) {
+			if (book.getAuthor().equals(author)) {
+				return book;
+			}
+		}
+		return null;
+	}
+	
+	public List<Book> findAll(String title) {
+		List<Book> resultsList= new ArrayList<Book>();
+		for (Book book : bookList) {
+			if (book.getTitle().equals(title)) {
+				resultsList.add(book);
+			}
+		}
+		return resultsList;
 	}
 
 	public String getName() {
@@ -92,12 +101,12 @@ public class Person {
 		this.surname = surname;
 	}
 
-	public List<Book> getListBooks() {
-		return listBook;
+	public List<Book> getBookList() {
+		return bookList;
 	}
 
-	public void setListBook(List<Book> listBooks) {
-		this.listBook = listBooks;
+	public void setBookList(List<Book> bookList) {
+		this.bookList = bookList;
 	}
-
+	
 }

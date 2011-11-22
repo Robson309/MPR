@@ -1,50 +1,46 @@
 package com.pl.robert;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
 public class Main {
-
-	private static Logger logger = Logger.getLogger(Main.class);
-
-	public static void main(String[] args) throws YearException {
-
+	
+	private static Logger logger= Logger.getLogger(Main.class);
+	
+	public static void main(String[] args) {
+		
 		PropertyConfigurator.configure("Log4J.properties");
-
-		Person ja = new Person("Jan", "Kowalski");
-
-		ja.addBook("Cration games", 2007);
-		try
-		{
-			ja.addBook("Cration games 2", 1888);
+			
+		Book java = new Book("Java","Horstan", 2005);
+		Book games = new Book("Creation games","Demo", 1998);
+		Book C = new Book("C#","Rader", 1999);
+		Book computer = new Book("How works computer","unknow autor", 2006);
+		
+		try {
+			java.setDatePublication(1840);
+			} catch (YearException e) {
+			logger.error(e);
+			
 		}
-		catch(YearException e)
-		{
-			logger.error(e.getMessage());
-		}
-		ja.addBook("Java", 2009);
-		ja.addBook("Pascal", 1999);
-		ja.addBook("C#",2000);
-		ja.editBook("C#", 2010);
-		ja.removeBook("Pascal");
-
-		ja.showPerson();
-		System.out.println("***********************************");
-		ja.showBook();
-		System.out.println("Search");
-		ja.searchBook("Cration games");
-
-		System.out.println("***********************************");
-
-		Person lol = new Person("Jan", "Nowak");
-
-		lol.addBook("CCS", 2006);
-		lol.removeAllBooks();
-		lol.addBook("HTML5", 2011);
-
-		lol.showPerson();
-		System.out.println("***********************************");
-		lol.showBook();
-
+		
+		games.setTitle("Creation games 2");
+		List<Book> bookList = new ArrayList<Book>();
+		Person person = new Person("Jan", "Kowalski", bookList);
+		
+		person.addBook(java);
+		person.addBook(games);
+		person.addBook(C);
+		person.addBook(computer);
+		//System.out.println(person.searchBookTitle("C#"));
+		person.removeBook(person.searchBookTitle("Java"));
+		
+		person.showPerson();
+		person.showBooks();
 	}
+	
 }
+
