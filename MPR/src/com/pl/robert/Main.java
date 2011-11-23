@@ -14,6 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		PropertyConfigurator.configure("Log4J.properties");
+		logger.info("start program");
 			
 		Book java = new Book("Java","Horstan", 2005);
 		Book games = new Book("Creation games","Demo", 1998);
@@ -39,6 +40,7 @@ public class Main {
 		
 		person.showPerson();
 		person.showBooks();
+		logger.info("finish program");
 	}
 	
 }
