@@ -3,7 +3,11 @@ package com.pl.robert;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 public class Person {
+	private static Logger logger = Logger.getLogger(Person.class);
+	
 	public String name;
 	public String surname;
 		
@@ -32,6 +36,7 @@ public class Person {
 
 	public void showPerson() {
 		System.out.println(name + " " + surname);
+		logger.info("show person " + name + " " + surname );
 	}
 
 	public void printBook() {
@@ -43,15 +48,18 @@ public class Person {
 	public void addBook(Book b) {
 		
 		bookList.add(b);
+		logger.info("Book: " + b.title + " author " + b.author + " date of publication " + b.datepublication);
 	}
 
 	public void removeBook(Book book) {		
 		bookList.remove(book);
+		logger.info("remove book" + book.title);
 		}
 		
 
 	public void clearBookList() {
 		bookList.clear();
+		logger.info("Clear book list");
 	}
 
 
@@ -62,6 +70,7 @@ public class Person {
 				return book;
 			}
 		}
+		logger.info("search book" + title);
 		return null;
 	}
 	
@@ -72,6 +81,7 @@ public class Person {
 				return book;
 			}
 		}
+		logger.info("search book by author" + author);
 		return null;
 	}
 	
@@ -82,6 +92,7 @@ public class Person {
 				resultsList.add(book);
 			}
 		}
+		logger.info("findAll by title: " + title);
 		return resultsList;
 	}
 

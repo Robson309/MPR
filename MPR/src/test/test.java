@@ -15,9 +15,21 @@ public class test {
 	}
 	
 	@Test
+	public void testFalseName() {
+		Person person = new Person("Jan", "Niezbedny");
+		assertFalse(person.getName().equals("Bolek"));
+	}
+	
+	@Test
+	public void testFalseSurname() {
+		Person person = new Person("Jan", "Niezbedny");
+		assertFalse(person.getSurname().equals("Zbedny"));
+	}
+	
+	@Test
 	public void testSurname() {
 		Person person = new Person("Jan", "Niezbedny");
-		assertTrue(person.getSurname().equals("Niezbedny"));
+		assertFalse(person.getSurname().equals("Zbedny"));
 	}
 
 	@Test

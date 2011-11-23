@@ -35,7 +35,6 @@ public class Main {
 		person.addBook(games);
 		person.addBook(C);
 		person.addBook(computer);
-		//System.out.println(person.searchBookTitle("C#"));
 		person.removeBook(person.searchBookTitle("Java"));
 		
 		person.showPerson();
