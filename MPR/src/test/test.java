@@ -19,10 +19,18 @@ public class test {
 	}
 	
 	@Test
-	public void testFalseSurname() {
-		Person person = new Person("Jan", "Niezbedny");
-		assertFalse(person.getSurname().equals("Zbedny"));
+	public void testTitle() {
+		Person person = new Person("Jan", "Niezbedny");	
+		String title = "C++";
+		Book b = new Book(title, "Grebosz", 1998);
+		person.addBook(b);
+		assertEquals(person.getBookList().get(0).getTitle(), person.getBookList().get(0).getTitle());
+		assertSame(person.getBookList().get(0).getTitle(), title);
+		assertNotNull(person.getBookList().get(0).getTitle());
 	}
+	//asserequals
+	//assersame
+	//asernull
 	
 	@Test
 	public void testSurname() {
@@ -31,11 +39,23 @@ public class test {
 	}
 
 	@Test
+	public void testFalseSurname() {
+		Person person = new Person("Jan", "Niezbedny");
+		assertFalse(person.getSurname().equals("Zbedny"));
+	}
+	
+	@Test
 	public void testAddBook() throws YearException {
 		Person person = new Person("Jan", "Niezbedny");
 		Book b = new Book("C++", "Grebosz", 1998);
 		person.addBook(b);
 		assertTrue(person.getBookList().size() == 1);
+	}
+	
+	@Test
+	public void testFalseAddBook() throws YearException {
+		Person person = new Person("Jan", "Niezbedny");
+		assertFalse(person.getBookList().size() == 1);
 	}
 
 	@Test
@@ -93,5 +113,15 @@ public class test {
 		testowy.addBook(b);
 		testowy.getBookList().get(0).setDatePublication(newyear);
 		assertTrue(testowy.getBookList().get(0).getDatePublication() == newyear);
+	}
+	
+	@Test
+	public void testFalseSetYearPublication() throws YearException {
+		Person testowy = new Person("Jan", "Niezbedny");
+		int oldyear = 1998;
+		int newyear = 2007;
+		Book b = new Book("Java zaawansowana", "Horstan", oldyear);
+		testowy.addBook(b);
+		assertFalse(testowy.getBookList().get(0).getDatePublication() == newyear);
 	}
 }
